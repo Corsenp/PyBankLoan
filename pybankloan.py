@@ -3,6 +3,9 @@ from tkinter.messagebox import *
 
 class Loan():
     def __init__(self, dictionary):
+        '''
+        Init method for Loan class
+        '''
         try:
             self.dictionary = dictionary
             self.firstname = dictionary.get("firstname")
@@ -18,27 +21,42 @@ class Loan():
             print("Value Error : {}".format(error))
 
     def calculate_annual_interest_payment(self):
+        '''
+        Method that will calculate the annual interest payments
+        '''
         loan_years = self.loan_duration / 12
         if (loan_years == 0):
             loan_years = 1
         self.annual_interest_payment = self.requested_loan * self.interest_rate / loan_years
     
     def calculate_loan_to_income(self):
+        '''
+        Method that will calculate loan to income attribute
+        '''
         self.loan_to_income = self.requested_loan / self.income
     
     def check_annual_interest_payment_validation(self):
+        '''
+        Method that will check the validation for the annual interest payment attribute
+        '''
         self.calculate_annual_interest_payment()
         if self.annual_interest_payment > ((20 * self.income) / 100):
             self.validation = False
         return self.validation
     
     def check_loan_to_income_validation(self):
+        '''
+        Method that will check the validation for the loan to income attribute
+        '''
         self.calculate_loan_to_income()
         if self.loan_to_income > 4:
             self.validation = False
         return self.validation
     
     def check_credit_score_validation(self):
+        '''
+        Method that will check the validation for the credit score attribute
+        '''
         if self.credit_score < 600:
             self.validation = False
         return self.validation
@@ -207,9 +225,7 @@ def main():
     '''
     Main function
     '''
-    #open_window()
     application = Application()
     application.init_window()
-    print(application.dictionary)
 
 main()
