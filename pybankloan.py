@@ -189,10 +189,9 @@ class Application():
         loan = Loan(self.dictionary)
         loan.check_loan_validity()
         if loan.validation == True:
-            showinfo('Loan', 'The loan is validated')
+            showinfo('Loan', 'The loan is approved')
         else:
             showwarning('Loan', 'The loan is rejected')
-        print(self.dictionary)
 
     def init_window(self):
         '''
