@@ -3,23 +3,19 @@ from tkinter.messagebox import *
 
 class Loan():
     def __init__(self, dictionary):
-        self.dictionary = dictionary
-            #self.firstname = dictionary.get("firstname")
-            #self.lastname = dictionary.get("lastname")
-            #self.socialSecurity = dictionary.get("socialSecurity")
-            #self.requestedLoan = float(dictionary.get("requestedLoan"))
-            #self.loanDuration = int(dictionary.get("loanDuration"))
-            #self.interestRate = float(dictionary.get("interestRate"))
-            #self.income = float(dictionary.get("income"))
-            #self.creditScore = int(dictionary.get("creditScore"))
-        self.validation = True
-    
-    def init_variables(self):
-        self.loan_duration = int(self.dictionary.get("loan_duration"))
-        self.requested_loan = int(self.dictionary.get("requested_loan"))
-        self.interest_rate = float(self.dictionary.get("interest_rate"))
-        self.income = int(self.dictionary.get("income"))
-        self.credit_score = int(self.dictionary.get("credit_score"))
+        try:
+            self.dictionary = dictionary
+            self.firstname = dictionary.get("firstname")
+            self.lastname = dictionary.get("lastname")
+            self.social_security = dictionary.get("social_security")
+            self.requested_loan = float(dictionary.get("requested_loan"))
+            self.loan_duration = int(dictionary.get("loan_duration"))
+            self.interest_rate = float(dictionary.get("interest_rate"))
+            self.income = float(dictionary.get("income"))
+            self.credit_score = int(dictionary.get("credit_score"))
+            self.validation = True
+        except ValueError as error:
+            print("Value Error : {}".format(error))
 
     def calculate_annual_interest_payment(self):
         loan_years = self.loan_duration / 12
@@ -43,12 +39,11 @@ class Loan():
         return self.validation
     
     def check_credit_score_validation(self):
-        if self.credit_score > 600:
+        if self.credit_score < 600:
             self.validation = False
         return self.validation
     
     def check_loan_validity(self):
-        self.init_variables()
         self.check_loan_to_income_validation()
         self.check_annual_interest_payment_validation()
         self.check_credit_score_validation()
